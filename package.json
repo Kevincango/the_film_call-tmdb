@@ -1,0 +1,19 @@
+{
+  "name": "the_film_call-tmdb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevincango/the_film_call-tmdb.git"
+  },
+  "author": "@kevin cantu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kevincango/the_film_call-tmdb/issues"
+  },
+  "homepage": "https://github.com/Kevincango/the_film_call-tmdb#readme"
+}
