@@ -1,3 +1,297 @@
-body{
-    background-color: red;
+/* General */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+:root {
+  --background-main: #181818;
+  --background-secondary: #242424;
+  --text-main: #EAEAEA;
+  --text-secondary: #B0B0B0;
+  --highlight: #FFC107;
+  --border-color: #333333;
+  
+  --font-family-titles: 'Dosis', sans-serif;
+  --font-family-text: 'Red Hat Display', sans-serif;
+  --font-weight-title1: 800;
+  --font-weight-title2: 700;
+  --font-weight-text1: 400;
+  --font-weight-text2: 500;
+}
+
+html {
+  background-color: var(--background-main);
+}
+
+body {
+  background-color: var(--background-secondary);
+  color: var(--text-main);
+  font-family: var(--font-family-text);
+  font-weight: var(--font-weight-text1);
+  font-size: 16px;
+  margin: 4px 0 0 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  font-size: 24px;
+  color: var(--highlight);
+  font-family: var(--font-family-titles);
+  font-weight: var(--font-weight-title1);
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-size: 18px;
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-title2);
+}
+
+h3 {
+  color: var(--text-main);
+  font-weight: var(--font-weight-text2);
+  font-size: 16px;
+}
+
+input {
+  background-color: var(--border-color);
+  color: var(--text-main);
+  border: none;
+  font-size: 18px;
+  padding-left: 16px;
+}
+
+input::placeholder {
+  color: var(--text-secondary);
+  font-family: var(--font-family-text);
+}
+
+button {
+  background-color: var(--highlight);
+  border: none;
+  color: var(--background-secondary);
+  font-weight: var(--font-weight-text2);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+
+/* Shared */
+.header-container, .trendingPreview-header, .categoriesPreview-container {
+    padding: 0 24px;
+  }
+  
+  .trendingPreview-container, .categoriesPreview-container, footer {
+    margin-top: 48px;
+  }
+  
+  .trendingPreview-header, .categoriesPreview-title {
+    margin-bottom: 24px;
+  }
+  
+  .movie-container {
+    cursor: pointer;
+  }
+  
+  .movie-img {
+    border-radius: 8px;
+  }
+  
+  .categoriesPreview-list, .categories-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    flex-wrap: wrap;
+  }
+
+  .category-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Color de fondo sutil */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 5px 15px; /* Espacio alrededor del texto */
+    transition: all 0.3s ease; /* Transición suave para los efectos */
+    cursor: pointer; /* Indicar que es clicable */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  }
+  
+  .category-container:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Efecto hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más profunda en hover */
+  }
+  
+  .category-title .trendingPreview-title {
+    margin: 0;
+    color: #fff; /* Color blanco para el texto */
+  }
+  
+  
+  
+  /* Header */
+  .header-container {
+    padding-top: 40px;
+    background-color: var(--background-main);
+  }
+  
+  .header-title, .header-title--categoryView {
+    color: var(--text-main);
+  }
+  
+  .header-arrow {
+    color: var(--text-secondary);
+  }
+  
+  .header-searchForm {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo sutilmente más claro que el fondo de la página */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 4px; /* Espacio interno */
+    display: flex; /* Para acomodar el input y el botón juntos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  }
+  
+  .header-searchForm input {
+    background-color: transparent; /* Sin fondo para que tome el fondo del formulario */
+    border: none; /* Sin bordes */
+    color: #fff; /* Color blanco para el texto */
+    flex-grow: 1; /* Para que ocupe todo el espacio disponible */
+    border-radius: 20px 0 0 20px; /* Redondear solo las esquinas izquierdas */
+    padding: 5px 10px; /* Espacio alrededor del texto */
+    outline: none; /* Sin contorno al enfocar */
+  }
+  
+  .header-searchForm button {
+    background-color: rgba(255, 255, 255, 0.1); /* Un tono más claro que el fondo del formulario */
+    border: none; /* Sin bordes */
+    color: #fff; /* Color blanco para el ícono */
+    border-radius: 0 20px 20px 0; /* Redondear solo las esquinas derechas */
+    padding: 5px 15px; /* Espacio alrededor del ícono */
+    cursor: pointer; /* Indicar que es clicable */
+    transition: all 0.3s ease; /* Transición suave para el efecto hover */
+    outline: none; /* Sin contorno al enfocar */
+  }
+  
+  .header-searchForm button:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Efecto hover */
+  }
+  
+  
+  /* Trending */
+  .trendingPreview-btn {
+    margin-top: 5px;
+    background-color: var(--highlight);
+    color: var(--background-secondary);
+    border: none; /* Eliminar cualquier borde por defecto */
+    padding: 10px 20px; /* Espacio interior del botón */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Indica que es clickeable */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+}
+
+.trendingPreview-btn:hover {
+    background-color: var(--background-secondary);
+    color: var(--highlight);
+}
+  
+  /* Categories */
+  .category-title {
+    color: var(--text-main);
+  }
+  
+  /* Generic List */
+  .genericList-container .movie-img {
+    border: 1px solid var(--border-color);
+  }
+  
+  /* Movie Detail */
+  .movieDetail-container {
+    background-color: var(--background-secondary);
+  }
+  
+  .movieDetail-title, .movieDetail-score {
+    color: var(--text-main);
+  }
+  
+  .movieDetail-description {
+    color: var(--text-secondary);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--background-main);
+    color: var(--text-main);
+  }
+
+  footer div{
+    display: flex;
+    justify-content: center;
+  }
+
+  footer img{
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  /* Navigation */
+  .inactive {
+    display: none;
+  }
+  
+/* Header Centrado */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tendencias en Columnas de 3 */
+.trendingPreview-movieList {
+  display: flex;
+  justify-content: center;  /* Centrado horizontal */
+  flex-wrap: wrap;
+  padding: 0 24px;
+}
+
+.trendingPreview-movieList .movie-container {
+  width: 300px;  /* Ancho fijo */
+  margin: 8px;  /* Margen en todos los lados */
+}
+
+
+
+
+  /* Estilo para pantallas pequeñas (mobile) */
+@media only screen and (max-width: 768px) { /* Se activa para pantallas menores o iguales a 768px de ancho */
+  .header-container {
+    flex-direction: column; /* Los elementos se apilan verticalmente */
+    padding: 10px 20px; 
+  }
+
+  .header-title {
+    margin-bottom: 10px; 
+    text-align: center;
+  }
+
+  .header-searchForm {
+    width: 100%; 
+  }
+
+  .header-searchForm input {
+    flex-grow: 1; 
+  }
+}
+  
+  
