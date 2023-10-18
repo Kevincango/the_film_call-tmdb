@@ -6,57 +6,9 @@ const api = axios.create({
     params: {
         'api_key': API_KEY,
     }
-}) 
+});
 
-async function getTrendingMoviesPreview(){
-    const {data} = await api('trending/movie/day');
-    const movies = data.results;
-
-    trendingMoviesPreviewList.innerHTML = "";
-    const moviesContainers = moviesMaquetation(movies);
-    moviesContainers.forEach(movie => {
-        trendingMoviesPreviewList.appendChild(movie);
-    })
-}
-
-async function getCategoriesPreview(){
-    const {data} = await api('genre/movie/list');
-    const categories = data.genres;
-    
-    categoriesPreviewList.innerHTML = "";
-    categories.forEach(category => {
-        const categoryContainer = document.createElement('div');
-        categoryContainer.classList.add('category-container');
-
-        const categoryTitle = document.createElement('h3');
-        categoryTitle.classList.add('category-title');
-        categoryTitle.setAttribute('id', 'id' + category.id);
-        categoryTitle.addEventListener('click', ()=> {
-            location.hash = `#category=${category.id}-${category.name}`;
-        })
-        const categoryTitleText = document.createTextNode(category.name);
-
-        categoryTitle.appendChild(categoryTitleText);
-        categoryContainer.appendChild(categoryTitle);
-        categoriesPreviewList.appendChild(categoryContainer);
-        
-    })
-}
-
-async function getMoviesByCategory(id){
-    const {data} = await api('discover/movie',{
-        params: {
-            with_genres: id,
-        }
-    });
-    const movies = data.results;
-    
-    genericSection.innerHTML = "";
-    const moviesElements = moviesMaquetation(movies);
-    moviesElements.forEach(movie => {
-        genericSection.appendChild(movie);
-    })
-}
+//helpers
 
 function moviesMaquetation(movies){
     let moviesContainers = [];
@@ -74,4 +26,73 @@ function moviesMaquetation(movies){
         moviesContainers.push(movieContainer);
     });
     return moviesContainers;
+}
+
+function createCategories(categories, container){
+    container.innerHTML = "";
+
+    categories.forEach(category => {
+        const categoryContainer = document.createElement('div');
+        categoryContainer.classList.add('category-container');
+
+        const categoryTitle = document.createElement('h3');
+        categoryTitle.classList.add('category-title');
+        categoryTitle.setAttribute('id', 'id' + category.id);
+        categoryTitle.addEventListener('click', ()=> {
+            location.hash = `#category=${category.id}-${category.name}`;
+        })
+        const categoryTitleText = document.createTextNode(category.name);
+
+        categoryTitle.appendChild(categoryTitleText);
+        categoryContainer.appendChild(categoryTitle);
+        container.appendChild(categoryContainer);
+        
+    })
+}
+
+async function getTrendingMoviesPreview(){
+    const {data} = await api('trending/movie/day');
+    const movies = data.results;
+
+    trendingMoviesPreviewList.innerHTML = "";
+    const moviesContainers = moviesMaquetation(movies);
+    moviesContainers.forEach(movie => {
+        trendingMoviesPreviewList.appendChild(movie);
+    })
+}
+
+async function getCategoriesPreview(){
+    const {data} = await api('genre/movie/list');
+    const categories = data.genres;
+    //categoriesPreviewList;
+    createCategories(categories,categoriesPreviewList);
+}
+
+async function getMoviesByCategory(id){
+    const {data} = await api('discover/movie',{
+        params: {
+            with_genres: id,
+        }
+    });
+    const movies = data.results;
+    
+    genericSection.innerHTML = "";
+    const moviesElements = moviesMaquetation(movies);
+    moviesElements.forEach(movie => {
+        genericSection.appendChild(movie);
+    })
+}
+
+async function getMovieBySearch(query){
+    const {data} = await api('search/movie', {
+        params: {
+            query,
+        }
+    });
+    const movies = data.results;
+    genericSection.innerHTML = "";
+    const films = moviesMaquetation(movies);
+    films.forEach(film => {
+        genericSection.appendChild(film);
+    })
 }
