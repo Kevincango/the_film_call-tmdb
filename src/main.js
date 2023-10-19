@@ -96,3 +96,14 @@ async function getMovieBySearch(query){
         genericSection.appendChild(film);
     })
 }
+
+async function getTrendingMovies(){
+    const {data} = await api('trending/movie/day');
+    const movies = data.results;
+
+    genericSection.innerHTML = "";
+    const moviesContainers = moviesMaquetation(movies);
+    moviesContainers.forEach(movie => {
+        genericSection.appendChild(movie);
+    })
+}

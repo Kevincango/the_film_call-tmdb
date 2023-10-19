@@ -113,6 +113,7 @@ button {
     gap: 10px;
     position: relative;
     flex-wrap: wrap;
+    margin-top: 10px;
   }
 
   .category-container {
@@ -140,6 +141,20 @@ button {
   .header-container {
     padding-top: 40px;
     background-color: var(--background-main);
+  }
+
+ /*  .header-container--long {
+    background-image: url('https://pics.filmaffinity.com/Deadpool-777527803-large.jpg');
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 19.27%, rgba(0, 0, 0, 0) 29.17%), url(https://pics.filmaffinity.com/Deadpool-777527803-large.jpg);
+    background-size: cover !important;
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    top: 0;
+  } */
+  
+  .header-container--categoryView {
+    background: linear-gradient(180deg, rgba(238, 204, 117, 0.5) 0%, rgba(238, 204, 117, 0) 72.92%);
   }
   
   .header-title, .header-title--categoryView {
@@ -240,7 +255,12 @@ button {
     
   /* Movie Detail */
   .movieDetail-container {
+    display: grid;
+    place-items: center;
     background-color: var(--background-secondary);
+    margin-bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .movieDetail-title, .movieDetail-score {
@@ -249,6 +269,26 @@ button {
   
   .movieDetail-description {
     color: var(--text-secondary);
+    word-wrap: break-word; /* Asegura que las palabras muy largas se rompan y pasen a la siguiente línea */
+    overflow-wrap: break-word; /* Similar a word-wrap, pero más moderno */
+    width: 100%; /* Asegura que el párrafo ocupa todo el ancho disponible */
+    box-sizing: border-box; /* Asegura que el padding y el borde no se sumen al ancho total */
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+  }
+
+  .relatedMovies-container .relatedMovies-scrollContainer{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+  }
+
+  .relatedMovies-title{
+    display: flex;
+    place-content: center;
+    margin: 15px 0;
   }
   
   /* Footer */
@@ -319,6 +359,18 @@ button {
 @media (max-width: 768px) {
   .genericList-container {
     grid-template-columns: repeat(1, 1fr); /* Cambiar a 2 columnas en pantallas más pequeñas */
+  }
+}
+
+@media (max-width:768px) {
+  .relatedMovies-container .relatedMovies-scrollContainer{
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width:600px){
+  .movieDetail-description{
+    padding: 0 20px;
   }
 }
 
