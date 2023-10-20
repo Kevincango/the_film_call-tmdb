@@ -16,7 +16,9 @@ function moviesMaquetation(movies){
     movies.forEach(movie => {
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
-
+        movieContainer.addEventListener('click', () => {
+            location.hash = `#movie=${movie.id}`;
+        })
         const movieImg = document.createElement('img');
         movieImg.classList.add('movie-img');
         movieImg.setAttribute('alt', movie.title);
@@ -59,6 +61,7 @@ async function getTrendingMoviesPreview(){
     moviesContainers.forEach(movie => {
         trendingMoviesPreviewList.appendChild(movie);
     })
+
 }
 
 async function getCategoriesPreview(){
@@ -106,4 +109,14 @@ async function getTrendingMovies(){
     moviesContainers.forEach(movie => {
         genericSection.appendChild(movie);
     })
+}
+
+async function getMovieById(id){
+    const {data: movie} = await api(`movie/${id}`);
+
+    movieDetailTitle.textContent = movie.title;
+    movieDetailDescription.textContent = movie.overview;
+    movieDetailScore.textContent = movie.vote_average;
+
+    createCategories(movie.genres, movieDetailCategoriesList);
 }

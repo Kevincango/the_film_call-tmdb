@@ -271,7 +271,7 @@ button {
     color: var(--text-secondary);
     word-wrap: break-word; /* Asegura que las palabras muy largas se rompan y pasen a la siguiente línea */
     overflow-wrap: break-word; /* Similar a word-wrap, pero más moderno */
-    width: 100%; /* Asegura que el párrafo ocupa todo el ancho disponible */
+    width: 90%; /* Asegura que el párrafo ocupa todo el ancho disponible */
     box-sizing: border-box; /* Asegura que el padding y el borde no se sumen al ancho total */
     display: flex;
     flex-wrap: wrap;
@@ -323,16 +323,43 @@ button {
 }
 
 /* Tendencias en Columnas de 3 */
+/* Estilo general del contenedor del carrusel */
 .trendingPreview-movieList {
-  display: flex;
-  justify-content: center;  /* Centrado horizontal */
-  flex-wrap: wrap;
-  padding: 0 24px;
+  display: flex;               /* Alineación horizontal de las películas */
+  overflow-x: scroll;          /* Desplazamiento horizontal */
+  scroll-snap-type: x mandatory; /* Efecto de "snap" al desplazarse */
+  padding: 0 24px;             /* Padding alrededor */
+  width: 90%;                /* solo el 90% del ancho disponible */
+  scrollbar-width: thin;      /* Hace que la barra de desplazamiento sea delgada */
+  margin: 0 auto;
 }
 
+/* Estilo de cada película dentro del carrusel */
 .trendingPreview-movieList .movie-container {
-  width: 300px;  /* Ancho fijo */
-  margin: 8px;  /* Margen en todos los lados */
+  flex: 0 0 300px;            /* Establece un ancho fijo para cada película y evita que crezcan o se encojan */
+  margin: 8px;                /* Margen alrededor de cada película */
+  scroll-snap-align: start;   /* Efecto "snap" al desplazarse */
+}
+
+/* Estilo para la barra de desplazamiento en navegadores basados en Webkit (Chrome, Safari) */
+.trendingPreview-movieList::-webkit-scrollbar {
+  width: 10px;
+}
+
+.trendingPreview-movieList::-webkit-scrollbar-track {
+  background-color: #2a2a2a; /* Color de fondo del track */
+}
+
+.trendingPreview-movieList::-webkit-scrollbar-thumb {
+  background-color: #444; /* Color de la barra de desplazamiento */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.trendingPreview-movieList::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color de la barra de desplazamiento al pasar el cursor sobre ella */
+}
+.trendingPreview-movieList {
+  scroll-snap-type: none;
 }
 
   /* Estilo para pantallas pequeñas (mobile) */
@@ -373,6 +400,10 @@ button {
     padding: 0 20px;
   }
 }
+
+
+
+
 
 
 
