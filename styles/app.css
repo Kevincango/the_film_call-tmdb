@@ -275,6 +275,15 @@ button {
     margin-top: 25px;
   }
 
+  .genericList-container .movie-container .movie-img {
+    height: 452px;
+    min-height: 452px;
+    max-height: 452px;
+    width: 302px;
+    min-width: 302px;
+    max-width: 302px;
+}
+
   .genericList-container .movie-container {
     display: flex;
     flex-wrap: wrap;
