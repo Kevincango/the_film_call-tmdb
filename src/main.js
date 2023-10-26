@@ -32,7 +32,14 @@ function moviesMaquetation(movies, lazy = false){
         movieImg.classList.add('movie-img');
         movieImg.setAttribute('alt', movie.title);
         movieImg.setAttribute(lazy ? 'data-img' : 'src',`https://image.tmdb.org/t/p/w300${movie.poster_path}`);
+        movieImg.addEventListener('error', ()=> {
+            movieImg.setAttribute('src', '../assets/server-imagenotfound.png')
+            const movieSpan = document.createElement('span');
+            const movieTitle = document.createTextNode(movie.title);
+            movieContainer.appendChild(movieSpan);
+            movieSpan.appendChild(movieTitle);
 
+        })
         if(lazy){
             lazyLoading.observe(movieImg);
         }
@@ -108,7 +115,7 @@ async function getMovieBySearch(query){
     });
     const movies = data.results;
     genericSection.innerHTML = "";
-    const films = moviesMaquetation(movies);
+    const films = moviesMaquetation(movies, true);
     films.forEach(film => {
         genericSection.appendChild(film);
     })

@@ -101,6 +101,7 @@ button {
   
   .movie-container {
     cursor: pointer;
+    position: relative;
   }
 
   .movie-container--loading{
@@ -123,6 +124,17 @@ button {
   .movie-container--loading:nth-child(3){
     animation-delay: .4s;
   }
+
+.movie-container span{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 10%;
+  text-align: center;
+  color: var(--background-secondary);
+  font-size: 20px;
+}
   
   .movie-img {
     border-radius: 8px;
