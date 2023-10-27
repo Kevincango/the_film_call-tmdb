@@ -301,6 +301,18 @@ button {
     flex-wrap: wrap;
   }
   
+  #genericList button{
+    width: 90px;
+    height: 20px;
+    margin: auto;
+    border: none;
+    
+  }
+  
+  #genericList button:hover {
+    background-color: rgb(243, 166, 166); /* Efecto hover */
+  }
+  
   .movie-item {
     flex: 1; /* Los elementos ocupan todo el espacio disponible en la fila */
     margin: 0 8px 16px 8px; /* Margen en los lados y abajo de cada elemento */

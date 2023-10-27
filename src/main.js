@@ -130,6 +130,37 @@ async function getTrendingMovies(){
     moviesContainers.forEach(movie => {
         genericSection.appendChild(movie);
     })
+
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Load more';
+    btnLoadMore.addEventListener('click', () => {
+        btnLoadMore.style.display = 'none';
+        getPaginatedTrendingMovies();
+    });
+    genericSection.appendChild(btnLoadMore);
+}
+
+let page = 1;
+
+async function getPaginatedTrendingMovies(){
+    page++;
+    const {data} = await api('trending/movie/day', {
+        params: {
+            page,
+        },
+    });
+    const movies = data.results;
+    const moviesContainers = moviesMaquetation(movies);
+    moviesContainers.forEach(movie => {
+        genericSection.appendChild(movie);
+    })
+    const btnLoadMore = document.createElement('button');
+    btnLoadMore.innerText = 'Load more';
+    btnLoadMore.addEventListener('click', () => {
+        btnLoadMore.style.display = 'none';
+        getPaginatedTrendingMovies();
+    });
+    genericSection.appendChild(btnLoadMore);
 }
 
 async function getMovieById(id){
