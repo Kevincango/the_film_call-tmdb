@@ -130,37 +130,40 @@ async function getTrendingMovies(){
     moviesContainers.forEach(movie => {
         genericSection.appendChild(movie);
     })
-
-    const btnLoadMore = document.createElement('button');
+    /* const btnLoadMore = document.createElement('button');
     btnLoadMore.innerText = 'Load more';
     btnLoadMore.addEventListener('click', () => {
         btnLoadMore.style.display = 'none';
         getPaginatedTrendingMovies();
     });
-    genericSection.appendChild(btnLoadMore);
+    genericSection.appendChild(btnLoadMore); */
 }
 
-let page = 1;
-
 async function getPaginatedTrendingMovies(){
-    page++;
-    const {data} = await api('trending/movie/day', {
-        params: {
-            page,
-        },
-    });
-    const movies = data.results;
-    const moviesContainers = moviesMaquetation(movies);
-    moviesContainers.forEach(movie => {
-        genericSection.appendChild(movie);
-    })
-    const btnLoadMore = document.createElement('button');
+    const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+    const scrollIsBottom =(scrollTop + clientHeight) >= scrollHeight;
+
+    if(scrollIsBottom){
+        page++;
+        const {data} = await api('trending/movie/day', {
+            params: {
+                page,
+            },
+        });
+
+        const movies = data.results;
+        const moviesContainers = moviesMaquetation(movies);
+        moviesContainers.forEach(movie => {
+            genericSection.appendChild(movie);
+        })
+    }
+    /* const btnLoadMore = document.createElement('button');
     btnLoadMore.innerText = 'Load more';
     btnLoadMore.addEventListener('click', () => {
         btnLoadMore.style.display = 'none';
         getPaginatedTrendingMovies();
     });
-    genericSection.appendChild(btnLoadMore);
+    genericSection.appendChild(btnLoadMore); */
 }
 
 async function getMovieById(id){
