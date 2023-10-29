@@ -99,12 +99,36 @@ async function getMoviesByCategory(id){
         }
     });
     const movies = data.results;
-    
+    maxPage = data.total_pages;
     genericSection.innerHTML = "";
     const moviesElements = moviesMaquetation(movies, true);
     moviesElements.forEach(movie => {
         genericSection.appendChild(movie);
     })
+}
+
+function getPaginatedMoviesByCategory(id){
+    return async function(){
+        const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+        const scrollIsBottom =(scrollTop + clientHeight) >= scrollHeight;
+        const pageIsNotMax = page < maxPage;
+    
+        if(scrollIsBottom && pageIsNotMax){
+            page++;
+            const {data} = await api('discover/movie', {
+                params: {
+                    id,
+                    page,
+                },
+            });
+    
+            const movies = data.results;
+            const moviesContainers = moviesMaquetation(movies,true);
+            moviesContainers.forEach(movie => {
+                genericSection.appendChild(movie);
+            })
+        }
+    }
 }
 
 async function getMovieBySearch(query){
@@ -114,6 +138,8 @@ async function getMovieBySearch(query){
         }
     });
     const movies = data.results;
+    maxPage = data.total_pages;
+    console.log(maxPage);
     genericSection.innerHTML = "";
     const films = moviesMaquetation(movies, true);
     films.forEach(film => {
@@ -121,12 +147,37 @@ async function getMovieBySearch(query){
     })
 }
 
+function getPaginatedMoviesBySearch(query){
+    return async function(){
+        const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
+        const scrollIsBottom =(scrollTop + clientHeight) >= scrollHeight;
+        const pageIsNotMax = page < maxPage;
+    
+        if(scrollIsBottom && pageIsNotMax){
+            page++;
+            const {data} = await api('search/movie', {
+                params: {
+                    query,
+                    page,
+                },
+            });
+    
+            const movies = data.results;
+            const moviesContainers = moviesMaquetation(movies,true);
+            moviesContainers.forEach(movie => {
+                genericSection.appendChild(movie);
+            })
+        }
+    }
+}
+
 async function getTrendingMovies(){
     const {data} = await api('trending/movie/day');
     const movies = data.results;
+    maxPage = data.total_pages;
 
     genericSection.innerHTML = "";
-    const moviesContainers = moviesMaquetation(movies);
+    const moviesContainers = moviesMaquetation(movie);
     moviesContainers.forEach(movie => {
         genericSection.appendChild(movie);
     })
@@ -142,8 +193,9 @@ async function getTrendingMovies(){
 async function getPaginatedTrendingMovies(){
     const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
     const scrollIsBottom =(scrollTop + clientHeight) >= scrollHeight;
+    const pageIsNotMax = page < maxPage;
 
-    if(scrollIsBottom){
+    if(scrollIsBottom && pageIsNotMax){
         page++;
         const {data} = await api('trending/movie/day', {
             params: {
