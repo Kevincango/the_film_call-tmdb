@@ -20,6 +20,7 @@
   --font-weight-text1: 400;
   --font-weight-text2: 500;
   --purple-light-2: #EEEAF2;
+  --purple-dark-1: #3E0F64;
 }
 
 html {
@@ -87,15 +88,15 @@ button {
 
 
 /* Shared */
-.header-container, .trendingPreview-header, .categoriesPreview-container {
+.header-container, .trendingPreview-header, .categoriesPreview-container, .liked-header {
     padding: 0 24px;
   }
   
-  .trendingPreview-container, .categoriesPreview-container, footer {
+  .trendingPreview-container, .categoriesPreview-container, .liked-container, footer {
     margin-top: 48px;
   }
   
-  .trendingPreview-header, .categoriesPreview-title {
+  .trendingPreview-header, .categoriesPreview-title, .liked-header {
     margin-bottom: 24px;
   }
   
@@ -138,6 +139,30 @@ button {
   
   .movie-img {
     border-radius: 8px;
+  }
+
+  .movie-btn{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .movie-btn::before{
+    content:  '🤍';
+  }
+
+  .movie-btn--liked{
+    background-color: var(--purple-light-2);
+    box-shadow: 0px 0px 10px 2px var(--background-secondary);
+  }
+
+  .movie-btn--liked::before{
+    content: '❤️';
   }
   
   .categoriesPreview-list, .categories-list {
@@ -287,13 +312,17 @@ button {
     margin-top: 25px;
   }
 
-  .genericList-container .movie-container .movie-img {
+  .genericList-container .movie-container .movie-img{
     height: 452px;
     min-height: 452px;
     max-height: 452px;
     width: 302px;
     min-width: 302px;
     max-width: 302px;
+}
+
+.movie-container .img-liked{
+  padding: 50px;
 }
 
   .genericList-container .movie-container {
@@ -394,7 +423,7 @@ button {
 
 /* Tendencias en Columnas de 3 */
 /* Estilo general del contenedor del carrusel */
-.trendingPreview-movieList {
+.trendingPreview-movieList, .liked-movieList{
   display: flex;               /* Alineación horizontal de las películas */
   overflow-x: scroll;          /* Desplazamiento horizontal */
   scroll-snap-type: x mandatory; /* Efecto de "snap" al desplazarse */
@@ -405,30 +434,30 @@ button {
 }
 
 /* Estilo de cada película dentro del carrusel */
-.trendingPreview-movieList .movie-container {
+.trendingPreview-movieList .movie-container, .liked-movieList {
   flex: 0 0 300px;            /* Establece un ancho fijo para cada película y evita que crezcan o se encojan */
   margin: 8px;                /* Margen alrededor de cada película */
   scroll-snap-align: start;   /* Efecto "snap" al desplazarse */
 }
 
 /* Estilo para la barra de desplazamiento en navegadores basados en Webkit (Chrome, Safari) */
-.trendingPreview-movieList::-webkit-scrollbar {
+.trendingPreview-movieList::-webkit-scrollbar, .liked-movieList::-webkit-scrollbar {
   width: 10px;
 }
 
-.trendingPreview-movieList::-webkit-scrollbar-track {
+.trendingPreview-movieList::-webkit-scrollbar-track, .liked-movieList::-webkit-scrollbar-track {
   background-color: #2a2a2a; /* Color de fondo del track */
 }
 
-.trendingPreview-movieList::-webkit-scrollbar-thumb {
+.trendingPreview-movieList::-webkit-scrollbar-thumb,.liked-movieList::-webkit-scrollbar-thumb {
   background-color: #444; /* Color de la barra de desplazamiento */
   border-radius: 5px; /* Bordes redondeados */
 }
 
-.trendingPreview-movieList::-webkit-scrollbar-thumb:hover {
+.trendingPreview-movieList::-webkit-scrollbar-thumb:hover, .liked-movieList::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Color de la barra de desplazamiento al pasar el cursor sobre ella */
 }
-.trendingPreview-movieList {
+.trendingPreview-movieList, .liked-movieList {
   scroll-snap-type: none;
 }
 

@@ -25,9 +25,6 @@ function moviesMaquetation(movies, lazy = false){
     movies.forEach(movie => {
         const movieContainer = document.createElement('div');
         movieContainer.classList.add('movie-container');
-        movieContainer.addEventListener('click', () => {
-            location.hash = `#movie=${movie.id}`;
-        })
         const movieImg = document.createElement('img');
         movieImg.classList.add('movie-img');
         movieImg.setAttribute('alt', movie.title);
@@ -39,12 +36,22 @@ function moviesMaquetation(movies, lazy = false){
             movieContainer.appendChild(movieSpan);
             movieSpan.appendChild(movieTitle);
 
+        });
+        movieImg.addEventListener('click', () => {
+            location.hash = `#movie=${movie.id}`;
         })
+        const movieBtn = document.createElement('button');
+        movieBtn.classList.add('movie-btn');
+        movieBtn.addEventListener('click', ()=>{
+            movieBtn.classList.toggle('movie-btn--liked');
+        });
+
         if(lazy){
             lazyLoading.observe(movieImg);
         }
         
         movieContainer.appendChild(movieImg);
+        movieContainer.appendChild(movieBtn);
         moviesContainers.push(movieContainer);
     });
 
