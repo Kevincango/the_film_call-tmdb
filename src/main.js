@@ -19,6 +19,30 @@ const lazyLoading = new IntersectionObserver((entries)=>{
     })
 })
 
+function likedMovieList(){
+    const item = JSON.parse(localStorage.getItem('liked_movies'));
+    let movie;
+
+    if(item){
+        movie = item;
+    }else{
+        movie = {};
+    }
+    return movie;
+}
+
+function likeMovie(movie){
+    const likedMovies = likedMovieList();
+
+    if(likedMovies[movie.id]){
+        likedMovies[movie.id] = undefined;
+    }else{
+        likedMovies[movie.id] = movie;
+    }
+
+    localStorage.setItem('liked_movies', JSON.stringify(likedMovies));
+}
+
 function moviesMaquetation(movies, lazy = false){
     let moviesContainers = [];
 
@@ -44,6 +68,7 @@ function moviesMaquetation(movies, lazy = false){
         movieBtn.classList.add('movie-btn');
         movieBtn.addEventListener('click', ()=>{
             movieBtn.classList.toggle('movie-btn--liked');
+            likeMovie(movie);
         });
 
         if(lazy){

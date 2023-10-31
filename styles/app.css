@@ -321,9 +321,11 @@ button {
     max-width: 302px;
 }
 
-.movie-container .img-liked{
-  padding: 50px;
-}
+/* .liked-container{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+} */
 
   .genericList-container .movie-container {
     display: flex;
@@ -423,7 +425,7 @@ button {
 
 /* Tendencias en Columnas de 3 */
 /* Estilo general del contenedor del carrusel */
-.trendingPreview-movieList, .liked-movieList{
+.trendingPreview-movieList, .liked-container .liked-movieList{
   display: flex;               /* Alineación horizontal de las películas */
   overflow-x: scroll;          /* Desplazamiento horizontal */
   scroll-snap-type: x mandatory; /* Efecto de "snap" al desplazarse */
@@ -434,7 +436,7 @@ button {
 }
 
 /* Estilo de cada película dentro del carrusel */
-.trendingPreview-movieList .movie-container, .liked-movieList {
+.trendingPreview-movieList .movie-container, .liked-movieList .movie-container {
   flex: 0 0 300px;            /* Establece un ancho fijo para cada película y evita que crezcan o se encojan */
   margin: 8px;                /* Margen alrededor de cada película */
   scroll-snap-align: start;   /* Efecto "snap" al desplazarse */
@@ -454,7 +456,7 @@ button {
   border-radius: 5px; /* Bordes redondeados */
 }
 
-.trendingPreview-movieList::-webkit-scrollbar-thumb:hover, .liked-movieList::-webkit-scrollbar-thumb:hover {
+.trendingPreview-movieList::-webkit-scrollbar-thumb:hover, .liked-movieList.liked-movieList::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Color de la barra de desplazamiento al pasar el cursor sobre ella */
 }
 .trendingPreview-movieList, .liked-movieList {
