@@ -66,9 +66,11 @@ function moviesMaquetation(movies, lazy = false){
         })
         const movieBtn = document.createElement('button');
         movieBtn.classList.add('movie-btn');
+        likedMovieList()[movie.id] && movieBtn.classList.add('movie-btn--liked');
         movieBtn.addEventListener('click', ()=>{
             movieBtn.classList.toggle('movie-btn--liked');
             likeMovie(movie);
+            getLikedMovies();
         });
 
         if(lazy){
@@ -209,7 +211,7 @@ async function getTrendingMovies(){
     maxPage = data.total_pages;
 
     genericSection.innerHTML = "";
-    const moviesContainers = moviesMaquetation(movie);
+    const moviesContainers = moviesMaquetation(movies, true);
     moviesContainers.forEach(movie => {
         genericSection.appendChild(movie);
     })
@@ -269,5 +271,16 @@ async function getSimilarMoviesById(id){
     const relatedMovies = moviesMaquetation(similarMovies);
     relatedMovies.forEach(movie => {
         relatedMoviesContainer.appendChild(movie);
+    })
+}
+
+function getLikedMovies(){
+    const likedMovies = likedMovieList();
+    console.log(likedMovies);
+    const likedMoviesArray = Object.values(likedMovies);
+    likedMoviesArticle.innerHTML = "";
+    const likedMoviesMaquetation = moviesMaquetation(likedMoviesArray, true);
+    likedMoviesMaquetation.forEach(movie => {
+        likedMoviesArticle.appendChild(movie);
     })
 }

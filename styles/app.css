@@ -312,7 +312,7 @@ button {
     margin-top: 25px;
   }
 
-  .genericList-container .movie-container .movie-img{
+  .genericList-container .movie-container .movie-img, .movie-container,.movie-img{
     height: 452px;
     min-height: 452px;
     max-height: 452px;
@@ -333,8 +333,8 @@ button {
   }
   
   #genericList button{
-    width: 90px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin: auto;
     border: none;
     
