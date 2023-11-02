@@ -2,6 +2,31 @@ let page = 1;
 let maxPage;
 let infiniteScroll;
 
+const translations = {
+    en: {
+      trending: "Trend",
+      seeMore: "See more",
+      categories: "Categories",
+      favorites: "Favorites movies",
+      similar: "Similar movies"
+    },
+    es: {
+      trending: "Tendencia",
+      seeMore: "Ver más",
+      categories: "Categorías",
+      favorites: "Películas favoritas",
+      similar: "Películas similares"
+    },
+    pt_BR: {
+      trending: "Tendência",
+      seeMore: "Ver mais",
+      categories: "Categorias",
+      favorites: "Filmes favoritos",
+      similar: "Filmes similares"
+    },
+  };
+  
+
 searchFormBtn.addEventListener('click', () => {
     location.hash = '#search=' + searchFormInput.value;
   });
@@ -26,6 +51,16 @@ arrowBtn.addEventListener('click', () => {
 
 window.addEventListener('DOMContentLoaded', navigator, false);
 window.addEventListener('hashchange', navigator, false);
+window.addEventListener('DOMContentLoaded', function () {
+    const langContent = translations[navLanguage.split('-')[0]] || translations.en;
+   console.log(navLanguage.split('-')[0]);
+    document.querySelector('.trendingPreview-title').textContent = langContent.trending;
+    document.querySelector('.trendingPreview-btn').textContent = langContent.seeMore;
+    document.querySelector('.categoriesPreview-title').textContent = langContent.categories;
+    document.querySelector('.liked-title').textContent = langContent.favorites;
+    document.querySelector('.relatedMovies-title').textContent = langContent.similar;
+  });
+  
 /* window.addEventListener('scroll', infiniteScroll, false);     */
 
 
@@ -170,5 +205,7 @@ function categoriesPage(){
 
   getMoviesByCategory(categoryId);
   infiniteScroll = getPaginatedMoviesByCategory(categoryId);
+
+  decodeStringInPage();
 }
 

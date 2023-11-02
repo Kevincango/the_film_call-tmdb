@@ -1,3 +1,4 @@
+const navLanguage = window.navigator.language;
 const api = axios.create({
     baseURL: 'https://api.themoviedb.org/3/',
     Headers: {
@@ -5,10 +6,18 @@ const api = axios.create({
     },
     params: {
         'api_key': API_KEY,
+        'language': navLanguage,
     }
 });
 
 //helpers
+
+function decodeStringInPage(){
+    let elements = document.querySelectorAll('a, p, h1, h2, h3, span');
+    elements.forEach(e => {
+        e.textContent = decodeURIComponent(e.textContent);
+    });
+}
 
 const lazyLoading = new IntersectionObserver((entries)=>{
     entries.forEach((entry) => {
