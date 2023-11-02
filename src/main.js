@@ -63,7 +63,7 @@ function moviesMaquetation(movies, lazy = false){
         movieImg.setAttribute('alt', movie.title);
         movieImg.setAttribute(lazy ? 'data-img' : 'src',`https://image.tmdb.org/t/p/w300${movie.poster_path}`);
         movieImg.addEventListener('error', ()=> {
-            movieImg.setAttribute('src', '../assets/server-imagenotfound.png')
+            movieImg.setAttribute('src', './assets/server-imagenotfound.png')
             const movieSpan = document.createElement('span');
             const movieTitle = document.createTextNode(movie.title);
             movieContainer.appendChild(movieSpan);
